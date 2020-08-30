@@ -1,4 +1,5 @@
 ﻿using MyStore.Core.Models;
+using MyStore.Core.ViewModels;
 using MyStore.DataAccess.InMemory;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,13 @@ namespace MyStore.WebUI.Controllers
     public class ProductManagerController : Controller
     {
         ProductRepository context;
+        ProductCategoryRepository productCategories;
+
 
         public ProductManagerController()
         {
             context = new ProductRepository();
+            productCategories = new ProductCategoryRepository();
         }
         // GET: ProductManager
         public ActionResult Index()
@@ -25,8 +29,15 @@ namespace MyStore.WebUI.Controllers
 
         public ActionResult Create()
         {
-            Product product = new Product();
-            return View(product);
+            //created reference as viewModel
+            ProductManagerViewModel viewModel = new ProductManagerViewModel();
+
+            //Put empty product
+            viewModel.Product = new Product();
+            //send in this product categories which I will get grom database
+            viewModel.ProductCategories = productCategories.Collection();
+            // return to page this view instead of product
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -55,7 +66,23 @@ namespace MyStore.WebUI.Controllers
             }
             else
             {
-                return View(product);
+                //    So just to recap what we're doing is getting either an empty product or the product with loaded from
+                //    the database who return it to the view and instead of returning that product to the view we're instead
+                //    using the View model to hold that products and a list of all the product categories out of our database
+                //    but because we're now passing a different view model.
+                //    That's the view we need to actually update the view pitches themselves.
+                //    open the product manager view pages and update model  @model MyStore.Core.Model.Product  AS 
+                //     @model MyStore.Core.ViewModels.ProductManagerViewModel
+
+                //created reference as viewModel
+                ProductManagerViewModel viewModel = new ProductManagerViewModel();
+
+                //Put empty product
+                viewModel.Product = new Product();
+                //send in this product categories which I will get grom database
+                viewModel.ProductCategories = productCategories.Collection();
+                // return to page this view instead of product
+                return View(viewModel);
             }
         }
 

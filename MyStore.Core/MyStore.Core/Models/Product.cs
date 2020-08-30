@@ -22,6 +22,7 @@ namespace MyStore.Core.Models
         public string Category { get; set; }
         public string Image { get; set; }
 
+        //Constructor that we can generate Id.
         public Product()
         {
             this.Id = Guid.NewGuid().ToString();
