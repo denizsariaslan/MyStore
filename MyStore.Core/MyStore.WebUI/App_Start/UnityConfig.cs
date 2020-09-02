@@ -1,3 +1,6 @@
+using MyStore.Core.Contracts;
+using MyStore.Core.Models;
+using MyStore.DataAccess.InMemory;
 using System;
 
 using Unity;
@@ -34,6 +37,8 @@ namespace MyStore.WebUI
         /// allows resolving a concrete type even if it was not previously
         /// registered.
         /// </remarks>
+
+        //RegisterTypes method that gets called from our activator and tells it to register all our types.
         public static void RegisterTypes(IUnityContainer container)
         {
             // NOTE: To load from web.config uncomment the line below.
@@ -42,6 +47,10 @@ namespace MyStore.WebUI
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
+
+            // Registered our two repositories
+            container.RegisterType<IRepository<Product>, InMemoryRepository<Product>>();
+            container.RegisterType<IRepository<ProductCategory>, InMemoryRepository<ProductCategory>>();
         }
     }
 }
