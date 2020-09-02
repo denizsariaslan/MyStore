@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 
 namespace MyStore.Core.Models
 {
-    public class ProductCategory
+    // BaseEntitiy implementation
+    public class ProductCategory : BaseEntity
     {
-        public string Id { get; set; }
+        // BaseEntitiy has already an Id
+        //public string Id { get; set; }
         public string Category { get; set; }
 
-        //Constractor that we can generate Id.
-        public ProductCategory()
-        {
-            this.Id = Guid.NewGuid().ToString();
-        }
+        // when I implement BaseEntity I need to get rid of the constructor because creation an Id handled in the base class
+        ////Constractor that we can generate Id.
+        ////public ProductCategory()
+        ////{
+        ////    this.Id = Guid.NewGuid().ToString();
+        ////}
     }
 }

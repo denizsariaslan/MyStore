@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 
 namespace MyStore.Core.Models
 {
-    public class Product
+    // BaseEntitiy implementation
+    public class Product : BaseEntity
     {
-        public string Id { get; set; }
+        // BaseEntitiy has already an Id
+        //public string Id { get; set; }
 
         [StringLength(20)]
         [DisplayName("Product Name")]
@@ -22,11 +24,13 @@ namespace MyStore.Core.Models
         public string Category { get; set; }
         public string Image { get; set; }
 
+        // when I implement BaseEntity I need to get rid of the constructor because creation an Id handled in the base class
+
         //Constructor that we can generate Id.
-        public Product()
-        {
-            this.Id = Guid.NewGuid().ToString();
-        }
+        //public Product()
+        //{
+        //    this.Id = Guid.NewGuid().ToString();
+        //}
 
     }
 
