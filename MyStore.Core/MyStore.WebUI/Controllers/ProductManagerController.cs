@@ -23,7 +23,7 @@ namespace MyStore.WebUI.Controllers
         IRepository<Product> context;
         IRepository<ProductCategory> productCategories;
 
-        // interface update
+        // interface's update
         public ProductManagerController(IRepository<Product> productContext, IRepository<ProductCategory> productCategoriesContext )
         {
             context = productContext;
@@ -43,7 +43,7 @@ namespace MyStore.WebUI.Controllers
 
             //Put empty product
             viewModel.Product = new Product();
-            //send in this product categories which I will get grom database
+            //send in this product categories which I will get from database
             viewModel.ProductCategories = productCategories.Collection();
             // return to page this view instead of product
             return View(viewModel);
@@ -86,9 +86,9 @@ namespace MyStore.WebUI.Controllers
                 //created reference as viewModel
                 ProductManagerViewModel viewModel = new ProductManagerViewModel();
 
-                //Put empty product
-                viewModel.Product = new Product();
-                //send in this product categories which I will get grom database
+                //Call exciting product
+                viewModel.Product = product;
+                //send in this product categories which I will get from database
                 viewModel.ProductCategories = productCategories.Collection();
                 // return to page this view instead of product
                 return View(viewModel);

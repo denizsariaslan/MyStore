@@ -20,6 +20,6 @@ namespace MyStore.DataAccess.SQL
         }
 
         public DbSet<Product> Products { get; set; }
-        public DbSet<ProductCategory> P0roductCategories { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
     }
 }
