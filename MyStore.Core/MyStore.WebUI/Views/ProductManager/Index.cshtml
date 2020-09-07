@@ -11,6 +11,8 @@
 </p>
 <table class="table">
     <tr>
+        @*Images upload modification*@
+        <th></th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -23,14 +25,18 @@
         <th>
             @Html.DisplayNameFor(model => model.Category)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Image)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+         @*Images upload modification*@
+        <td> @*this columns condaining image*@
+            <img class="img-thumbnail" style="height:50px" src="~/Content/ProductImages/@item.Image" />
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
@@ -43,9 +49,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Category)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Image)
-        </td>
+        </td>*@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |         
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })

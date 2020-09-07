@@ -7,6 +7,7 @@ namespace MyStore.DataAccess.SQL.Migrations
 
     internal sealed class Configuration : DbMigrationsConfiguration<MyStore.DataAccess.SQL.DataContext>
     {
+        //The configuration classes where we can manually add data on database creation and set some other options.
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
