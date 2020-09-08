@@ -13,7 +13,6 @@ namespace MyStore.WebUI.Controllers
 {
     public class ProductManagerController : Controller
     {
-
         //    ProductRepository context;
         //    ProductCategoryRepository productCategories;
 
@@ -25,11 +24,13 @@ namespace MyStore.WebUI.Controllers
         IRepository<ProductCategory> productCategories;
 
         // interface's update
-        public ProductManagerController(IRepository<Product> productContext, IRepository<ProductCategory> productCategoriesContext )
+        public ProductManagerController(IRepository<Product> productContext, IRepository<ProductCategory> productCategoriesContext)
         {
             context = productContext;
             productCategories = productCategoriesContext;
         }
+
+
         // GET: ProductManager
         public ActionResult Index()
         {
