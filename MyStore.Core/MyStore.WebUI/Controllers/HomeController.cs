@@ -1,5 +1,6 @@
 ﻿using MyStore.Core.Contracts;
 using MyStore.Core.Models;
+using MyStore.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,10 +27,32 @@ namespace MyStore.WebUI.Controllers
             context = productContext;
             productCategories = productCategoriesContext;
         }
-        public ActionResult Index()
+        //Modification for product listing
+        public ActionResult Index(string Category=null)
         {
-            List<Product> products = context.Collection().ToList();
-            return View(products);
+            //List<Product> products = context.Collection().ToList();
+            //return View(products);
+
+            List<Product> products; // create emty list of products
+            List<ProductCategory> Categories = productCategories.Collection().ToList(); // get a list of productCategories
+
+            if(Category==null)//test to see whether the category is normal or not.
+            {
+                products = context.Collection().ToList();
+            }
+            else //Return a filtered list of products.
+            {
+                //IQueryable allows us to construct a filter.
+                products = context.Collection().Where(p => p.Category == Category).ToList();
+            }
+            // Create ProductListViewModel
+
+            ProductListViewModel model = new ProductListViewModel();
+            //Sign various that I need
+            model.Products = products;
+            model.ProductCategories = Categories;
+
+              return View(model);
         }
 
         public ActionResult Details(string Id)
