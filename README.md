@@ -1,2 +1,2 @@
 # MyStore
-My Store eCommerce
+My Store E-Commerce project has been processing...
