@@ -1,5 +1,6 @@
 ﻿using MyStore.Core.Contracts;
 using MyStore.Core.Models;
+using MyStore.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Web;
 
 namespace MyStore.Services
 {
-    public class CartService
+    public class CartService : ICartService
     {
         //Need these repository; access to some underlying data and load actual cart and cart items
         IRepository<Product> productContext; 
@@ -136,6 +137,75 @@ namespace MyStore.Services
             }
             
         }
+        // new method GetCartItems for CartItemViewModel
+        public List<CartItemViewModel> GetCartItems(HttpContextBase httpContext)
+        {
+            //Get our Cart from database
+            //I am just retrieving items if the Cart does not touch ... exist do not want it go ahead and create new one.
+            //if there is no items in the Cart to the Moment will simply return an empty in memory Cart.
+
+            Cart cart = GetCart(httpContext, false);
+
+            //if we have retrieve the cart then I need to query the product table and the cart items to get the information that I need.
+            //I used linq
+            //This method will return list of all items in the cart which is great for when a user clicks to look at the cart page.
+
+            if (cart != null)
+            {
+                var results = (from b in cart.CartItems
+                               join p in productContext.Collection() on b.ProductId equals p.Id
+                               select new CartItemViewModel()
+                               {
+                                   Id = b.Id,
+                                   Quanity = b.Quanity,
+                                   ProductName = p.Name,
+                                   Image = p.Image,
+                                   Price = p.Price
+                               }
+                              ).ToList();
+
+                return results;
+            }
+            else
+            {
+                return new List<CartItemViewModel>();
+            }
+        }
+
+        ////Provide a Cart summary which will simply be a total list of all the items in a Cart and a total quantity in the Cart. for this I need a another view model
+
+        public CartSummaryViewModel GetCartSummary(HttpContextBase httpContext)
+        {
+            //The first thing I need to do is get my cart and again as before I want to not create the cart if its currently empty.
+            Cart cart = GetCart(httpContext, false);
+            //create our view model and default it (0,0). this is why I created construct solved by default zero item zero cart total
+            CartSummaryViewModel model = new CartSummaryViewModel(0, 0);
+            if (cart != null)
+            {
+                //The first calculate how many items are in the cart. I used linq query
+                //select just the quantities from each item our cart and then sum them up.
+                int? cartCount = (from item in cart.CartItems
+                                    select item.Quanity).Sum();
+
+                decimal? cartTotal = (from item in cart.CartItems
+                                        join p in productContext.Collection() on item.ProductId equals p.Id
+                                        select item.Quanity * p.Price).Sum();
+
+                //the final step is to assign these values to our model.
+                model.CartCount = cartCount ?? 0;
+                model.CartTotal = cartTotal ?? decimal.Zero;
+
+                return model;
+            }
+            else
+            {
+                return model;
+            }
+
+
+
+        }
+
 
     }
 }
