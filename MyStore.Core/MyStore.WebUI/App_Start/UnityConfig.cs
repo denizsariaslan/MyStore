@@ -2,6 +2,7 @@ using MyStore.Core.Contracts;
 using MyStore.Core.Models;
 using MyStore.DataAccess.InMemory;
 using MyStore.DataAccess.SQL;
+using MyStore.Services;
 using System;
 
 using Unity;
@@ -56,6 +57,13 @@ namespace MyStore.WebUI
             //Implementation changed with SQLRepository
             container.RegisterType<IRepository<Product>, SQLRepository<Product>>();
             container.RegisterType<IRepository<ProductCategory>, SQLRepository<ProductCategory>>();
+
+            //Connecting new two (Cart, CartItems) repositories
+
+            container.RegisterType<IRepository<Cart>, SQLRepository<Cart>>();
+            container.RegisterType<IRepository<CartItem>, SQLRepository<CartItem>>();
+            //Registering CartService
+            container.RegisterType<ICartService, CartService>();
         }
     }
 }

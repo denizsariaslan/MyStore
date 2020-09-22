@@ -36,7 +36,8 @@
                     <h4>@item.Price</h4>
                 </div>
                 <div class="col-md-12">
-                    <a href="#" class="btn btn-default">Add To Cart</a>
+                    @*Adding reference to Add to Cart button work*@
+                    <a href="@Url.Action("AddToCart","Cart", new { Id = item.Id })" class="btn btn-default">Add To Cart</a>
                 </div>
             </div>
         }

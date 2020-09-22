@@ -30,7 +30,8 @@
                 $@Html.DisplayFor(model => model.Price)
             </dd>
             <dt></dt>
-            <dd><a href="#" class="btn btn-default"> Add To Cart</a></dd>
+             @*Adding reference to Add to Cart button work*@
+            <dd><a href="@Url.Action("AddToCart","Cart", new { Id = Model.Id })" class="btn btn-default"> Add To Cart</a></dd>
 
             <dt></dt>
             <dd>@Html.ActionLink("Back to List", "Index")</dd>
