@@ -89,6 +89,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CartControllerTests.cs" />
+    <Compile Include="Mocks\MockContext.cs" />
+    <Compile Include="Mocks\MockHttpContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
@@ -99,11 +102,20 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyStore.Core\MyStore.Core.csproj">
+      <Project>{46413244-E181-4352-98FF-182930B0E2D2}</Project>
+      <Name>MyStore.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyStore.Services\MyStore.Services.csproj">
+      <Project>{2330E0FA-E100-4BCD-926E-46864348C5C1}</Project>
+      <Name>MyStore.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyStore.WebUI\MyStore.WebUI.csproj">
       <Project>{5A9776ED-7D7E-4E30-9DA2-4F8C7450FC14}</Project>
       <Name>MyStore.WebUI</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
