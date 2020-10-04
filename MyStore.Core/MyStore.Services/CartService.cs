@@ -206,6 +206,14 @@ namespace MyStore.Services
 
         }
 
+        //Adding ClearCart method
+        public void ClearCart(HttpContextBase httpContext) 
+        {
+            Cart cart = GetCart(httpContext, false); //sending httpContext to get the cart
+            cart.CartItems.Clear(); //Clear method which is the part of the linq method
+            cartContext.Commit();
+        }
+
 
     }
 }

@@ -23,12 +23,14 @@ namespace MyStore.WebUI.Tests.Controllers
             //Creating repositories
             IRepository<Cart> carts = new MockContext<Cart>();
             IRepository<Product> products = new MockContext<Product>();
+            IRepository<Order> orders = new MockContext<Order>();// creating MockContext for Order
 
             var httpContext = new MockHttpContext();
 
 
             ICartService cartService = new CartService(products, carts);
-            var controller = new CartController(cartService);//Creating instance of controller
+            IOrderService orderService = new OrderService(orders); // Creating order service
+            var controller = new CartController(cartService, orderService);//Creating instance of controller //orderService added for test
             controller.ControllerContext = new System.Web.Mvc.ControllerContext(httpContext, new System.Web.Routing.RouteData(), controller); //Inject httpContext. (I need to specify ControllerContext is a new ControllerContext and send in our Mock context 
 
             //Act
@@ -68,6 +70,7 @@ namespace MyStore.WebUI.Tests.Controllers
             ////Setup
             IRepository<Cart> carts = new MockContext<Cart>();
             IRepository<Product> products = new MockContext<Product>();
+            IRepository<Order> orders = new MockContext<Order>();// creating MockContext for Order
 
             //Consantiration on calculations 
             //Manually adding some items into products database 
@@ -84,8 +87,9 @@ namespace MyStore.WebUI.Tests.Controllers
             carts.Insert(cart);
 
             ICartService cartService = new CartService(products, carts);
+            IOrderService orderService = new OrderService(orders); // Creating order service
 
-            var controller = new CartController(cartService); //Creating controller
+            var controller = new CartController(cartService, orderService); //Creating controller //orderService added for test
             var httpContext = new MockHttpContext();
             httpContext.Request.Cookies.Add(new System.Web.HttpCookie("eCommerceCart") { Value = cart.Id }); //Manually add cookies 
             controller.ControllerContext = new System.Web.Mvc.ControllerContext(httpContext, new System.Web.Routing.RouteData(), controller); //Inject httpContext(cookies).
@@ -98,6 +102,68 @@ namespace MyStore.WebUI.Tests.Controllers
             //Testing
             Assert.AreEqual(3, cartSummary.CartCount);
             Assert.AreEqual(25.00m, cartSummary.CartTotal);
+
+
+        }
+        [TestMethod]
+        public void CanCheckOutAndCreateOrder()
+        {
+            ////Setup
+
+            IRepository<Product> products = new MockContext<Product>(); //Mock product repository created
+
+            //Adding some basic information in repository
+            //Added Id and Price because that's the only thing that will affect any of calculations
+            products.Insert(new Product() { Id = "1", Price = 10.00m });
+            products.Insert(new Product() { Id = "2", Price = 8.00m });
+            products.Insert(new Product() { Id = "3", Price = 13.00m });
+
+
+            IRepository<Cart> carts = new MockContext<Cart>();//Creating Mock Cart repository
+            Cart cart = new Cart(); //New underlying Cart
+            //Adding some basic information
+            cart.CartItems.Add(new CartItem() { ProductId = "1", Quanity = 2, CartId = cart.Id });
+            cart.CartItems.Add(new CartItem() { ProductId = "1", Quanity = 1, CartId = cart.Id });
+            cart.CartItems.Add(new CartItem() { ProductId = "1", Quanity = 3, CartId = cart.Id });
+
+            //I need to add that cart to the cart repository
+            carts.Insert(cart);
+
+            //Creating CartService
+            ICartService cartService = new CartService(products, carts);
+
+            //Creating OrderService first I need again repository of order
+            IRepository<Order> orders = new MockContext<Order>();
+            IOrderService orderService = new OrderService(orders);
+
+            //if I wanted to test the order service directly. I could simply act on the order service itself.
+            //but I am going to test controller again
+
+            //Adding additional information into create a CartController instance
+
+            var controller = new CartController(cartService, orderService); //controller expect cartService and OrderService
+            var httpContext = new MockHttpContext();//Injecting fake context so that it can read an write cookies
+            //Creating cookie itself manually because i am creating cart manually
+            httpContext.Request.Cookies.Add(new System.Web.HttpCookie("eCommerceCart")
+            {
+                Value = cart.Id
+            });
+
+            //As last one I need to add httpContext to the underlying ControllerContext
+            controller.ControllerContext = new ControllerContext(httpContext, new System.Web.Routing.RouteData(),controller);
+
+
+            ////Act
+
+            Order order = new Order();//creating order
+            controller.CheckOut(order);
+
+            ////Assert
+            Assert.AreEqual(3, order.OrderItems.Count); //testing order items
+            Assert.AreEqual(0, cart.CartItems.Count); //Make sure I have created an order and I want to clear the cart down
+
+            Order orderInRep = orders.Find(order.Id); //try and retrieve the order from the repository.
+            Assert.AreEqual(3, orderInRep.OrderItems.Count);//check 3 order items in the repository itself
 
 
         }

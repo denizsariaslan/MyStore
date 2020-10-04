@@ -25,5 +25,9 @@ namespace MyStore.DataAccess.SQL
         public DbSet<Cart> Carts { get; set; } //Setting Cart model into database
         public DbSet<CartItem> CartItems { get; set; } //Setting CartItem model into database
         public DbSet<Customer> Customers { get; set; } //Setting Customer model into database
+
+        public DbSet<Order> Orders { get; set; } //Setting Order model into database
+        public DbSet<OrderItem> OrderItems { get; set; } //Setting OrderItem model into database
+
     }
 }
