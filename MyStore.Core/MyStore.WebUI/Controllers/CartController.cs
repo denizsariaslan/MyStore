@@ -11,16 +11,19 @@ namespace MyStore.WebUI.Controllers
 {
     public class CartController : Controller
     {
+        ////Providing customer repository (linking customers to orders process)
+        IRepository<Customer> customers;
         //local instance of ICartService
         ICartService cartService;
         //Adding IOrderService for OrderModels process
         IOrderService orderService;
 
         //constructor allow to inject in the cart service
-        public CartController(ICartService CartService, IOrderService OrderService) //Adding IOrderService for OrderModels process
+        public CartController(ICartService CartService, IOrderService OrderService, IRepository<Customer> Customers) //Adding IOrderService for OrderModels process ////Providing customer repository (linking customers to orders process)
         {
             this.cartService = CartService;
             this.orderService = OrderService; //Adding IOrderService for OrderModels process
+            this.customers = Customers; //Providing customer repository (linking customers to orders process)
         }
         // GET: Cart
         public ActionResult Index()
@@ -61,17 +64,46 @@ namespace MyStore.WebUI.Controllers
         }
 
         //Adding Checkout page for OrderModels process
+        ////Updatig the first checkout actionresult and get the customers from the database(linking customers to orders process)
+        [Authorize]////Make sure the user us logged in (linking customers to orders process)
         public ActionResult CheckOut()
         {
-            return View();
+            Customer customer = customers.Collection().FirstOrDefault(c => c.Email == User.Identity.Name); //Using lambda expression to search the customer on their e-mail
+            //make sure the customer is not null
+            if (customer != null)
+            {
+                //Creating new order
+                Order order = new Order()
+                {
+                    FirstName = customer.FirstName,
+                    LastName = customer.LastName,
+                    Street = customer.Street,
+                    Email = customer.Email,
+                    City = customer.City,
+                    State = customer.State,
+                    Country = customer.Country,
+                    ZipCode = customer.ZipCode
+                };
+                return View(order);//ASP.Net page itself wiil taken object and apply it to the fields
+            }
+            //the customer is null it need to return error
+            else
+            {
+                return RedirectToAction("Error");
+            }
+
+            
+
         }
 
         //posting actual ChechkOut page itself for OrderModels process
         [HttpPost]
+        [Authorize]//Users have to be logged in (linking customers to orders process)
         public ActionResult CheckOut(Order order)
         {
             var cartItems = cartService.GetCartItems(this.HttpContext);
             order.OrderStatus = "Order Created"; //Update the status
+            order.Email = User.Identity.Name;//adding this here to make sure that the user is logged in (linking customers to orders process)
 
             //Payment process
 

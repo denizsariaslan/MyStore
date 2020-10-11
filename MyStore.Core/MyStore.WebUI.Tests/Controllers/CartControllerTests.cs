@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Principal;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyStore.Core.Contracts;
@@ -24,13 +25,14 @@ namespace MyStore.WebUI.Tests.Controllers
             IRepository<Cart> carts = new MockContext<Cart>();
             IRepository<Product> products = new MockContext<Product>();
             IRepository<Order> orders = new MockContext<Order>();// creating MockContext for Order
+            IRepository<Customer> customers = new MockContext<Customer>();//Creating MockContect repository for Customer (linking customers to orders process)
 
             var httpContext = new MockHttpContext();
 
 
             ICartService cartService = new CartService(products, carts);
             IOrderService orderService = new OrderService(orders); // Creating order service
-            var controller = new CartController(cartService, orderService);//Creating instance of controller //orderService added for test
+            var controller = new CartController(cartService, orderService, customers);//Creating instance of controller //orderService added for test //Adding customers (linking customers to orders process)
             controller.ControllerContext = new System.Web.Mvc.ControllerContext(httpContext, new System.Web.Routing.RouteData(), controller); //Inject httpContext. (I need to specify ControllerContext is a new ControllerContext and send in our Mock context 
 
             //Act
@@ -71,6 +73,7 @@ namespace MyStore.WebUI.Tests.Controllers
             IRepository<Cart> carts = new MockContext<Cart>();
             IRepository<Product> products = new MockContext<Product>();
             IRepository<Order> orders = new MockContext<Order>();// creating MockContext for Order
+            IRepository<Customer> customers = new MockContext<Customer>();//Creating MockContect repository for Customer (linking customers to orders process)
 
             //Consantiration on calculations 
             //Manually adding some items into products database 
@@ -89,7 +92,7 @@ namespace MyStore.WebUI.Tests.Controllers
             ICartService cartService = new CartService(products, carts);
             IOrderService orderService = new OrderService(orders); // Creating order service
 
-            var controller = new CartController(cartService, orderService); //Creating controller //orderService added for test
+            var controller = new CartController(cartService, orderService, customers); //Creating controller //orderService added for test ////Adding customers (linking customers to orders process)
             var httpContext = new MockHttpContext();
             httpContext.Request.Cookies.Add(new System.Web.HttpCookie("eCommerceCart") { Value = cart.Id }); //Manually add cookies 
             controller.ControllerContext = new System.Web.Mvc.ControllerContext(httpContext, new System.Web.Routing.RouteData(), controller); //Inject httpContext(cookies).
@@ -111,6 +114,7 @@ namespace MyStore.WebUI.Tests.Controllers
             ////Setup
 
             IRepository<Product> products = new MockContext<Product>(); //Mock product repository created
+            IRepository<Customer> customers = new MockContext<Customer>();//Creating MockContect repository for Customer (linking customers to orders process)
 
             //Adding some basic information in repository
             //Added Id and Price because that's the only thing that will affect any of calculations
@@ -139,15 +143,26 @@ namespace MyStore.WebUI.Tests.Controllers
             //if I wanted to test the order service directly. I could simply act on the order service itself.
             //but I am going to test controller again
 
+            ////Adding FakeUser(linking customers to orders process)
+            customers.Insert(new Customer() { Id = "1", Email = "denizsariaslann@gmail.com", ZipCode = "02129" });
+
+            ////Creating IPrincipal //built in class called GenericPrincipal takes in GenericIdentity that simply wants an email adress.(linking customers to orders process) 
+            //I Also need to tell it the type of authentication is Forms authentication(linking customers to orders process)
+            //I used null here because when I create our generic principle it wants to know what roles it has(linking customers to orders process)
+            //I am not using roles that can simply be null(linking customers to orders process)
+            IPrincipal FakeUser = new GenericPrincipal(new GenericIdentity("denizsariaslann@gmail.com","Forms"), null);
+
             //Adding additional information into create a CartController instance
 
-            var controller = new CartController(cartService, orderService); //controller expect cartService and OrderService
+            var controller = new CartController(cartService, orderService, customers); //controller expect cartService and OrderService //Adding customers (linking customers to orders process)
             var httpContext = new MockHttpContext();//Injecting fake context so that it can read an write cookies
             //Creating cookie itself manually because i am creating cart manually
             httpContext.Request.Cookies.Add(new System.Web.HttpCookie("eCommerceCart")
             {
                 Value = cart.Id
             });
+
+            httpContext.User = FakeUser;////Adding FakeUser(linking customers to orders process)
 
             //As last one I need to add httpContext to the underlying ControllerContext
             controller.ControllerContext = new ControllerContext(httpContext, new System.Web.Routing.RouteData(),controller);

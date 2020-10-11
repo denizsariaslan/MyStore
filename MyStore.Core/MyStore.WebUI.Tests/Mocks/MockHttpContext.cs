@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -21,6 +22,7 @@ namespace MyStore.WebUI.Tests.Mocks
         private MockRequest request;
         private MockResponse response;
         private HttpCookieCollection cookies;
+        private IPrincipal FakeUser; //(linking customers to orders process)
 
         //constructor
         public MockHttpContext()
@@ -32,7 +34,18 @@ namespace MyStore.WebUI.Tests.Mocks
             this.request = new MockRequest(cookies);
             this.response = new MockResponse(cookies);
         }
-       //Created some overarmed methods to actually return our overwritten request of responses.
+        //Create an override that returns our FakeUser.(linking customers to orders process)
+        public override IPrincipal User {
+            get
+            {
+                return this.FakeUser; //when I try to get that will return this start FakeUser.
+            }
+            set
+            {
+                this.FakeUser = value; //I also need to allow me to set the user so that I can simulate somebody who is locked in.
+            }
+        }
+        //Created some override methods to actually return our overwritten request of responses.
         public override HttpRequestBase Request
         {
             get
