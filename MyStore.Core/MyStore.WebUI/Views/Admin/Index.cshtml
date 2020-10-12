@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Admin";
+}
+
+<h2>Admin Pages</h2>
+
+<div class="col-md-6">
+    <h4>Product Management</h4>
+    <div class="list-group">
+        @*this is just going to create a link item to take us to our actual product category manager page*@
+        @Html.ActionLink("Product Categories", "Index", "ProductCategoryManager", null, new { @class = "list-group-item" })
+        @*this will take us to our actual product manager page.*@
+        @Html.ActionLink("Product", "Index", "ProductManager", null, new { @class = "list-group-item" })
+    </div>
+</div>
+<div class="col-md-6">
+    <h4>Order Management</h4>
+    <div class="list-group">
+        @*this will take us to our order manager page.*@
+        @Html.ActionLink("Orders", "Index", "OrderManager", null, new { @class = "list-group-item" })
+    </div>
+</div>
+<div class="col-md-12 clearfix"></div>

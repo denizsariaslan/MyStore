@@ -37,5 +37,22 @@ namespace MyStore.Services
             orderContext.Insert(baseOrder); //Insert baseOrder
             orderContext.Commit(); //Save the changes
         }
+
+        // Added this new method according to order management process
+        public List<Order> GetOrderList() //this will return our list of orders.
+        {
+            return orderContext.Collection().ToList();
+        }
+        // Added this new method according to order management process
+        public Order GetOrder(string Id) //this will return an individual order.
+        {
+            return orderContext.Find(Id);
+        }
+        // Added this new method according to order management process
+        public void UpdateOrder(Order updatedOrder) // this will update our order. // I want to update our Order will be the order status.
+        {
+            orderContext.Update(updatedOrder);
+            orderContext.Commit();
+        }
     }
 }

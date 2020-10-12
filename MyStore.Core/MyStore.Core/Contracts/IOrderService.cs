@@ -11,8 +11,10 @@ namespace MyStore.Core.Contracts
     public interface IOrderService
     {
         //It's going to want to take in an order object which would get created externally from the create orderservice
-        // because it's simply a model and then I am going to bring in a listed CartItemViewModel.
-
+        // because it's simply a model and then I am going to bring in a listed CartItemViewModel
         void CreateOrder(Order baseOrder, List<CartItemViewModel> cartItems);
+        List<Order> GetOrderList(); // Added this new method according to order management process
+        Order GetOrder(string Id); // Added this new method according to order management process
+        void UpdateOrder(Order updatedOrder); // Added this new method according to order management process
     }
 }
