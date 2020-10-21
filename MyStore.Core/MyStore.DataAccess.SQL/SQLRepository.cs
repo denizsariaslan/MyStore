@@ -38,8 +38,8 @@ namespace MyStore.DataAccess.SQL
 
         public void Delete(string Id)
         {
-            var t = Find(Id); //first thing to do is find the object based on its Id which we can use the internal Find method for that which is created.
-            if (context.Entry(t).State == EntityState.Detached) //We need to check the state of the entry.
+            var t = Find(Id); //first thing to do is find the object based on its Id which I can use the internal Find method for that which is created.
+            if (context.Entry(t).State == EntityState.Detached) //I need to check the state of the entry.
                 dbSet.Attach(t);
 
             dbSet.Remove(t);
@@ -58,7 +58,7 @@ namespace MyStore.DataAccess.SQL
         public void Update(T t)
         {
             dbSet.Attach(t);
-            context.Entry(t).State = EntityState.Modified; //This tells Entity framework that when we call the save change this method to look for this object whic is t and persists to the database
+            context.Entry(t).State = EntityState.Modified; //This tells Entity framework that when we call the save change this method to look for this object which is t and persists to the database
         }
     }
 }

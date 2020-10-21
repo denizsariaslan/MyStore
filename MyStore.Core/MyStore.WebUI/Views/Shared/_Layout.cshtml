@@ -22,9 +22,14 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Admin", "Index", "Admin")</li> @*Replacing them with a link to our Admin main page*@
+                    <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+
+                    @*@if (Request.IsAuthenticated && User.IsInRole("Admin"))*@  @*Authorization for Admin*@
+                    {
+                    @*<li>@Html.ActionLink("Admin", "Index", "Admin")</li>*@ @*Replacing them with a link to our Admin main page*@
                     @*<li>@Html.ActionLink("Product Admin", "Index", "ProductManager")</li>*@
                     @*<li>@Html.ActionLink("Category Admin", "Index", "ProductCategoryManager")</li>*@
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
                 @{ 
