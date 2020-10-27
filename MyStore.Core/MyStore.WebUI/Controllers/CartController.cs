@@ -41,7 +41,7 @@ namespace MyStore.WebUI.Controllers
             //Take in a product Id and pass that through to the cart service.
             cartService.AddToCart(this.HttpContext, Id);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Home");
         }
 
         //Remove into Cart

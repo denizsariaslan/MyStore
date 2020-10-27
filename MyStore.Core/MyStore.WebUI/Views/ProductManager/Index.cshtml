@@ -1,13 +1,14 @@
 ﻿@model IEnumerable<MyStore.Core.Models.Product>
 
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "CreateProduct";
 }
 
-<h2>Index</h2>
+<h2>Products</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New Product", "Create")
 </p>
 <table class="table">
     <tr>
@@ -26,37 +27,39 @@
             @Html.DisplayNameFor(model => model.Category)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.Image)
-        </th>*@
+                @Html.DisplayNameFor(model => model.Image)
+            </th>*@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-         @*Images upload modification*@
-        <td> @*this columns condaining image*@
-            <img class="img-thumbnail" style="height:50px" src="~/Content/ProductImages/@item.Image" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Image)
-        </td>*@
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |         
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*Images upload modification*@
+            <td>
+                @*this columns condaining image*@
+                <img class="img-thumbnail" style="height:50px" src="~/Content/ProductImages/@item.Image" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Image)
+                </td>*@
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
