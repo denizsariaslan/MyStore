@@ -288,6 +288,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\ProductImages\" />
+    <Folder Include="Content\SlaytImages\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

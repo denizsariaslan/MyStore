@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -18,14 +18,14 @@
                 </button>
                 <p class="site-title">
                     <a href="@Url.Action("Index", "Home")">
-                        <img src="~/Content/ProductImages/CoskunKurukahveLogo.jpeg" alt="" width="150" height="50" />
+                        <img src="~/Content/ProductImages/CoskunKurukahveLogoe.jpeg" class="img-circle" alt="" width="150" height="60" />
                     </a>
                 </p>
                 @*@Html.ActionLink("Coskun Kurukahve", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home" )</li>
+                    @*<li>@Html.ActionLink("Home", "Index", "Home" )</li>*@
                     <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
 
                     @*@if (Request.IsAuthenticated && User.IsInRole("Admin"))*@  @*Authorization for Admin*@
