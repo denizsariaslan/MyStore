@@ -95,7 +95,7 @@ namespace MyStore.Services
             Cart cart = GetCart(httpContext, true);//I wanna know what the CartId is and inserting an item always we need to make sure Cart is created and create is no need to be true.
 
             //if there's already a cart item in the uses cart with productId
-            //Because we've got the basket from the database and entity framework using because 
+            //Because we've got the cart from the database and entity framework using because 
             //we use the virtual keyboard on the list of Cart items will automatically load all those Cart items for as when ever I try to load cart items from database
 
             CartItem item = cart.CartItems.FirstOrDefault(i => i.ProductId == productId);
@@ -123,6 +123,27 @@ namespace MyStore.Services
             //Commit any changes I have made.
             cartContext.Commit();
         }
+        //Increment Cart item method
+
+        public void IncrementCartItem(HttpContextBase httpContext, string itemId)
+        {
+            Cart cart = GetCart(httpContext, true);//I wanna know what the CartId is and inserting an item always we need to make sure Cart is created and create is no need to be true.
+
+            //if there's already a cart item in the uses cart with productId
+            //Because we've got the cart from the database and entity framework using because 
+            //we use the virtual keyboard on the list of Cart items will automatically load all those Cart items for as when ever I try to load cart items from database
+
+            CartItem item = cart.CartItems.Where(i => i.Id == itemId).FirstOrDefault();
+            //if that item exist in the cart
+
+          
+            //increment our property
+            item.Quanity = item.Quanity + 1;
+            
+
+            //Commit any changes I have made.
+            cartContext.Commit();
+        }
 
         //Remove Cart item method
         public void RemoveFromCart(HttpContextBase httpContext, string itemId)
@@ -137,7 +158,37 @@ namespace MyStore.Services
             }
             
         }
-        // new method GetCartItems for CartItemViewModel
+
+        //Decrement Cart item method
+
+        public void DecrementCartItem(HttpContextBase httpContext, string itemId)
+        {
+            Cart cart = GetCart(httpContext, true);//I wanna know what the CartId is and inserting an item always we need to make sure Cart is created and create is no need to be true.
+
+            //if there's already a cart item in the uses cart with productId
+            //Because we've got the basket from the database and entity framework using because 
+            //we use the virtual keyboard on the list of Cart items will automatically load all those Cart items for as when ever I try to load cart items from database
+
+            CartItem item = cart.CartItems.FirstOrDefault(i => i.Id == itemId);
+            
+            //Decrement Quantity
+            if (item.Quanity > 1)
+            {  
+                item.Quanity = item.Quanity - 1;
+            }
+            else
+            {
+                
+                item.Quanity = 0;
+                cart.CartItems.Remove(item);
+
+            }
+
+            //Commit any changes I have made.
+            cartContext.Commit();
+        }
+
+        //new method GetCartItems for CartItemViewModel
         public List<CartItemViewModel> GetCartItems(HttpContextBase httpContext)
         {
             //Get our Cart from database

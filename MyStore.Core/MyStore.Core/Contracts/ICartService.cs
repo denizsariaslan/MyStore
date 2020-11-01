@@ -15,5 +15,8 @@ namespace MyStore.Core.Contracts
         List<CartItemViewModel> GetCartItems(HttpContextBase httpContext);
         CartSummaryViewModel GetCartSummary(HttpContextBase httpContext);
         void ClearCart(HttpContextBase httpContext);
+
+        void IncrementCartItem(HttpContextBase httpContext, string itemId);
+        void DecrementCartItem(HttpContextBase httpContext, string itemId);
     }
 }

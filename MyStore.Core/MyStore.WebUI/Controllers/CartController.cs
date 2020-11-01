@@ -44,6 +44,13 @@ namespace MyStore.WebUI.Controllers
             return RedirectToAction("Index","Home");
         }
 
+        public ActionResult IncrementCartItem(string Id)
+        {
+            //Take in a product Id and pass that through to the cart service.
+            cartService.IncrementCartItem(this.HttpContext, Id);
+
+            return RedirectToAction("Index","Cart");
+        }
         //Remove into Cart
         public ActionResult RemoveFromCart(string Id)
         {
@@ -51,6 +58,14 @@ namespace MyStore.WebUI.Controllers
             cartService.RemoveFromCart(this.HttpContext, Id);
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult DecrementCartItem(string Id)
+        {
+            //different from addtocart is Id is CartItem Id
+            cartService.DecrementCartItem(this.HttpContext, Id);
+
+            return RedirectToAction("Index","Cart");
         }
 
         //Cart Summary

@@ -5,7 +5,6 @@
 }
 
 <h2>Cart</h2>
-
 <table class="table">
     <tr>
         <th></th>
@@ -39,9 +38,15 @@
             and I just passed through what the actual value is way formatting. for this case is Price*@
         @string.Format("{0:c}", item.Price)
     </td>
-        @*for our line total is going to be almost same except I must be the price multiplied by Quantity*@
-        @string.Format("{0:c}", item.Price * item.Quanity)
+    @*for our line total is going to be almost same except I must be the price multiplied by Quantity*@
+    @string.Format("{0:c}", item.Price * item.Quanity)
     <td></td>
+    <td>
+        <a href="@Url.Action("IncrementCartItem","Cart", new { Id = item.Id })" class="glyphicon glyphicon-plus"></a>
+
+        <a href="@Url.Action("DecrementCartItem","Cart", new { Id = item.Id })" class="glyphicon glyphicon-minus"></a>
+    </td>
+
     <td>
         @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
         @*For better format*@
@@ -55,7 +60,7 @@
        @*I do not want to just an individual line out I want Item multiply by quantity if all the items in the cart. Created an in line linq query*@
         <td>@string.Format("{0:c}", (from p in Model select p.Price * p.Quanity).Sum())</td>
         @*Adding this item will allow them or give them a link to to to the check out page*@
-        <td><a href="@Url.Action("CheckOut","Cart")">CheckOut</a></td>
+        <td><a href="@Url.Action("CheckOut","Cart")">Check Out</a></td>
     </tr>
 
 </table>
