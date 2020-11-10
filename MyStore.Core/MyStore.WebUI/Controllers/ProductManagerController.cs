@@ -67,8 +67,8 @@ namespace MyStore.WebUI.Controllers
                     // setting ipage property = on the product itself going to give it a name as id it will always have a unique file reference +  find out the current extencion
                     product.Image = product.Id + Path.GetExtension(file.FileName);
                     //Saving to the disk.
-                    file.SaveAs(Server.MapPath("//Content//ProductImages//") + product.Image);
-
+                    string path = Path.Combine(Server.MapPath("//Content//ProductImages//") + product.Image);
+                    file.SaveAs(path);
                 }
                 context.Insert(product);
                 context.Commit();

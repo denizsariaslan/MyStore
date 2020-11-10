@@ -208,6 +208,26 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ProductImages\00f9dcb6-6209-42ae-a3a8-bcdc98924419.jpeg" />
+    <Content Include="Content\ProductImages\1b917a94-ce93-40e1-83c2-3ba7b996cb2a.jpg" />
+    <Content Include="Content\ProductImages\26ee5eb3-77c8-4d7b-b1e4-24889c0b0320.jpg" />
+    <Content Include="Content\ProductImages\50154e97-faac-42f6-87a5-37ada4d31563.jpg" />
+    <Content Include="Content\ProductImages\6bff2aba-192a-4a48-87b1-ca7d2087260c.jpeg" />
+    <Content Include="Content\ProductImages\70e6fd0d-304f-4c8b-9f07-bbb5d1a3442c.jpg" />
+    <Content Include="Content\ProductImages\87ce3b04-ab15-4108-816d-9cca1f31d31e.jpeg" />
+    <Content Include="Content\ProductImages\91b75a80-62f3-4f5a-b72d-eca4f519a517.jpg" />
+    <Content Include="Content\ProductImages\a7b85b7d-022d-45ea-bdcf-b4fbee7065fa.jpeg" />
+    <Content Include="Content\ProductImages\af720870-8c31-4c83-8ef6-700ed6f97b15.jpg" />
+    <Content Include="Content\ProductImages\CoskunKurukahveLogo.jpeg" />
+    <Content Include="Content\ProductImages\CoskunKurukahveLogoe.jpeg" />
+    <Content Include="Content\ProductImages\f7d16721-cdee-4b04-8e15-99f9770a8dfd.jpg" />
+    <Content Include="Content\SlaytImages\KahveCekirdegiCuval.jpg" />
+    <Content Include="Content\SlaytImages\KarisikBaharat.jpeg" />
+    <Content Include="Content\SlaytImages\KarisikBaharat.jpg" />
+    <Content Include="Content\SlaytImages\KarisikBaharat2.jpg" />
+    <Content Include="Content\SlaytImages\KarisikLokum.jpeg" />
+    <Content Include="Content\SlaytImages\Tarcin.jpeg" />
+    <Content Include="Content\SlaytImages\TurkKahvesiCezve.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -289,8 +309,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\ProductImages\" />
-    <Folder Include="Content\SlaytImages\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
