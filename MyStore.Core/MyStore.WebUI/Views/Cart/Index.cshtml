@@ -25,7 +25,7 @@
 
 @foreach (var item in Model) {
 <tr>
-    <td><img class="img" style="height:50px" src="~/Content/ProductImages/@item.Image" /></td>
+    <td><img class="img" style="height:150px" src="~/Content/ProductImages/@item.Image" /></td>
     <td>
         @Html.DisplayFor(modelItem => item.ProductName)
     </td>
@@ -43,7 +43,6 @@
     <td></td>
     <td>
         <a href="@Url.Action("IncrementCartItem","Cart", new { Id = item.Id })" class="glyphicon glyphicon-plus"></a>
-
         <a href="@Url.Action("DecrementCartItem","Cart", new { Id = item.Id })" class="glyphicon glyphicon-minus"></a>
     </td>
 
@@ -51,16 +50,17 @@
         @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
         @*For better format*@
         @*Actual url I used Url.Action link RemoveFromCart action in the CartController and going to pass through Id which wil be our item.Id*@
-        <a href="@Url.Action("RemoveFromCart","Cart", new { Id = item.Id })" class="btn btn-danger">Remove From Cart</a>
+        <a href="@Url.Action("RemoveFromCart","Cart", new { Id = item.Id })" class="btn btn-danger btn-sm">Remove From Cart</a>
     </td>
 </tr>
 }
     <tr>
-        <td colspan="4" style="text-align:right"><strong>Cart Total</strong></td>
+        <td colspan="4" style="text-align:right"><strong>Cart Total:</strong></td>
        @*I do not want to just an individual line out I want Item multiply by quantity if all the items in the cart. Created an in line linq query*@
         <td>@string.Format("{0:c}", (from p in Model select p.Price * p.Quanity).Sum())</td>
         @*Adding this item will allow them or give them a link to to to the check out page*@
-        <td><a href="@Url.Action("CheckOut","Cart")">Check Out</a></td>
+        <td><a href="@Url.Action("CheckOut","Cart")" class="btn btn-success">Check Out</a></td>
     </tr>
 
 </table>
+
