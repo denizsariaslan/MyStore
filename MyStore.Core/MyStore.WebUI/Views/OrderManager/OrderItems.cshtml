@@ -16,18 +16,18 @@
                 @Html.DisplayNameFor(model => model.ProductId)
             </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.ProductName)
+            @Html.DisplayName(MyStore.WebUI.Resources.Resource.ProductName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayName(MyStore.WebUI.Resources.Resource.Price)
         </th>
         @*<th>
                 @Html.DisplayNameFor(model => model.Image)
             </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.Quanity)
-        </th>
-        <th>Line Order</th>
+    <th>
+        @Html.DisplayName(MyStore.WebUI.Resources.Resource.Quanity)
+    </th>
+    <th>@Html.DisplayName(MyStore.WebUI.Resources.Resource.Line_Total)</th>
     </tr>
 
     @foreach (var item in Model)
@@ -65,7 +65,7 @@
     @*Have a row that simply displays order total*@
     <tr>
         <td colspan="3" style="text-align:right">
-            <strong>Order Total</strong>
+            <strong>@Html.DisplayName(MyStore.WebUI.Resources.Resource.Order_Total):</strong>
         </td>
         <td>
             @String.Format("{0:c}", (from p in Model select p.Quanity * p.Price).Sum())

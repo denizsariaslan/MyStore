@@ -13,7 +13,6 @@ namespace MyStore.Core.Models
     {
         // BaseEntitiy has already an Id
         //public string Id { get; set; }
-        [DisplayName("Product Category Name")]
         public string Category { get; set; }
 
         // when I implement BaseEntity I need to get rid of the constructor because creation an Id handled in the base class

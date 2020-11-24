@@ -7,16 +7,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
+            @Html.DisplayName(MyStore.WebUI.Resources.Resource.CreatedAt)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayName(MyStore.WebUI.Resources.Resource.FirstName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayName(MyStore.WebUI.Resources.Resource.LastName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayName(MyStore.WebUI.Resources.Resource.Email)
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.Street)
@@ -33,9 +33,9 @@
         <th>
             @Html.DisplayNameFor(model => model.ZipCode)
         </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.OrderStatus)
-        </th>
+    <th>
+        @Html.DisplayName(MyStore.WebUI.Resources.Resource.OrderStatus)
+    </th>
         <th></th>
     </tr>
 
@@ -72,7 +72,7 @@
             @Html.DisplayFor(modelItem => item.OrderStatus)
         </td>
         <td>
-            @Html.ActionLink("Manage Order", "UpdateOrder", new { id = item.Id }) |
+            @Html.ActionLink(MyStore.WebUI.Resources.Resource.Manage_Order, "UpdateOrder", new { id = item.Id },new { @class = "btn btn-info" }) 
             @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |*@
             @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
             @*@Html.ActionLink("Delete", "Delete", new { id=item.Id })*@

@@ -14,7 +14,6 @@ namespace MyStore.Core.Models
         public virtual ICollection<CartItem> CartItems { get; set; }
 
         //Constructor that will create an empty list of basket items of creation.
-
         public Cart()
         {
             this.CartItems = new List<CartItem>();

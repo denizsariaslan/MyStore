@@ -3,7 +3,9 @@ using MyStore.Core.Models;
 using MyStore.Core.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -67,8 +69,25 @@ namespace MyStore.WebUI.Controllers
                 return View(product);
             }
         }
+        [HttpPost]
+        public ActionResult Index(HomeController r)
+        {
+            return View(r);
+        }
+            public ActionResult Change(String LanguageAbbrevation)
+        {
+            if (LanguageAbbrevation != null)
+            {
+                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(LanguageAbbrevation);
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(LanguageAbbrevation);
+            }
+            HttpCookie cookie = new HttpCookie("Language");
+            cookie.Value = LanguageAbbrevation;
+            Response.Cookies.Add(cookie);
 
-        public ActionResult About()
+            return RedirectToAction("Index", "Home");
+        }
+            public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 

@@ -1,7 +1,7 @@
-﻿@{ 
+﻿@{
     ViewBag.Title = "Thank You";
 }
 
-<h2>Thank You</h2>
-Thank you for your order.<br /><br />
-Your Order Id = @ViewBag.OrderId
+<h2>@Html.DisplayName(MyStore.WebUI.Resources.Resource.Thank_You)</h2>
+@Html.DisplayName(MyStore.WebUI.Resources.Resource.Thank_you_for_your_order).<br /><br />
+@Html.DisplayName(MyStore.WebUI.Resources.Resource.Your_Order_Id) = @ViewBag.OrderId

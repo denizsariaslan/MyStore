@@ -13,11 +13,9 @@ namespace MyStore.Core.Models
     {
         public string Id { get; set; }
         //when we look in our database and we want to do troubleshooting we can see exactly when particular classes were created.
-        [DisplayName("Created Date and Time")]
         public DateTimeOffset CreatedAt { get; set; }
 
         // Constructor
-
         public BaseEntity()
         {
             //set internal Id

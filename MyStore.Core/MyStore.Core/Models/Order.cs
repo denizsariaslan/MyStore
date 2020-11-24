@@ -23,9 +23,7 @@ namespace MyStore.Core.Models
         //separate billing address in shipping addresses.
         //So by storing some of these details separately within the order it just gives us a little bit more flexibility.
 
-        [DisplayName("First Name")]
         public string FirstName { get; set; }
-        [DisplayName("Last Name")]
         public string LastName { get; set; }
 
         public string Email { get; set; } 
@@ -33,9 +31,7 @@ namespace MyStore.Core.Models
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
-        [DisplayName("Zip Code")]
         public string ZipCode { get; set; }
-        [DisplayName("Order Status")]
         public string OrderStatus { get; set; } //Adding an order status here. This is so that I manage out the order itself so for example when I go from raising in order to processing payment to shipping the payment and so on I can keep track of where I am at.
         public virtual ICollection<OrderItem> OrderItems { get; set; } //Creating a list of items this fall tell entity framework to link the two together so that when I load an order I will automatically get the items.
 

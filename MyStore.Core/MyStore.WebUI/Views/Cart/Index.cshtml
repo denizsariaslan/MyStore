@@ -3,22 +3,24 @@
 @{
     ViewBag.Title = "Cart";
 }
-
-<h2>Cart</h2>
+    <h2>@Html.DisplayName(MyStore.WebUI.Resources.Resource.Shopping_Cart)</h2>
 <table class="table">
     <tr>
         <th></th>
         <th>
-            @Html.DisplayNameFor(model => model.ProductName)
+            @*@Html.DisplayNameFor(model => model.ProductName)*@
+            @Html.DisplayName(MyStore.WebUI.Resources.Resource.ProductName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Quanity)
+            @*@Html.DisplayNameFor(model => model.Quanity)*@
+            @Html.DisplayName(MyStore.WebUI.Resources.Resource.Quanity)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @*@Html.DisplayNameFor(model => model.Price)*@
+            @Html.DisplayName(MyStore.WebUI.Resources.Resource.Price)
         </th>
         <th>
-            Line Total
+            @Html.DisplayName(MyStore.WebUI.Resources.Resource.Line_Total)
         </th>
         <th></th>
     </tr>
@@ -38,9 +40,8 @@
             and I just passed through what the actual value is way formatting. for this case is Price*@
         @string.Format("{0:c}", item.Price)
     </td>
-    @*for our line total is going to be almost same except I must be the price multiplied by Quantity*@
-    @string.Format("{0:c}", item.Price * item.Quanity)
-    <td></td>
+    @*for our line total is going to be almost same except I must be the price multiplied by Quantity*@ 
+    <td>@string.Format("{0:c}", item.Price * item.Quanity)</td>
     <td>
         <a href="@Url.Action("IncrementCartItem","Cart", new { Id = item.Id })" class="glyphicon glyphicon-plus"></a>
         <a href="@Url.Action("DecrementCartItem","Cart", new { Id = item.Id })" class="glyphicon glyphicon-minus"></a>
@@ -50,17 +51,19 @@
         @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
         @*For better format*@
         @*Actual url I used Url.Action link RemoveFromCart action in the CartController and going to pass through Id which wil be our item.Id*@
-        <a href="@Url.Action("RemoveFromCart","Cart", new { Id = item.Id })" class="btn btn-danger btn-sm">Remove From Cart</a>
+        @Html.ActionLink(MyStore.WebUI.Resources.Resource.RemoveFromCart,"RemoveFromCart","Cart", new { Id = item.Id }, new { @class="btn btn-danger btn-sm" })
+        @*<a href="@Url.Action("RemoveFromCart","Cart", new { Id = item.Id })" class="btn btn-danger btn-sm">Remove From Cart</a>*@
     </td>
 </tr>
 }
-    <tr>
-        <td colspan="4" style="text-align:right"><strong>Cart Total:</strong></td>
-       @*I do not want to just an individual line out I want Item multiply by quantity if all the items in the cart. Created an in line linq query*@
-        <td>@string.Format("{0:c}", (from p in Model select p.Price * p.Quanity).Sum())</td>
-        @*Adding this item will allow them or give them a link to to to the check out page*@
-        <td><a href="@Url.Action("CheckOut","Cart")" class="btn btn-success">Check Out</a></td>
-    </tr>
+<tr>
+    <td colspan="4" style="text-align:right"><strong> @Html.DisplayName(MyStore.WebUI.Resources.Resource.Order_Total):</strong></td>
+    @*I do not want to just an individual line out I want Item multiply by quantity if all the items in the cart. Created an in line linq query*@
+    <td>@string.Format("{0:c}", (from p in Model select p.Price * p.Quanity).Sum())</td>
+    @*Adding this item will allow them or give them a link to to to the check out page*@
+<td>@Html.ActionLink(MyStore.WebUI.Resources.Resource.CheckOut, "CheckOut", "Cart", new { @class = "btn btn-success" })</td>
+    @*<td><a href="@Url.Action("CheckOut","Cart")" class="btn btn-success">Check Out</a></td>*@
+</tr>
 
 </table>
 

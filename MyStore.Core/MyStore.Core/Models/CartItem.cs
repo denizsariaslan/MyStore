@@ -11,9 +11,8 @@ namespace MyStore.Core.Models
     {
         // CartId will be the link back to the Cart that contains the Cart items
         public string CartId { get; set; }
-        //a link to a ProductId
         public string ProductId { get; set; }
-        [DisplayName("Quantity")]
+      
         public int Quanity { get; set; }
     }
 

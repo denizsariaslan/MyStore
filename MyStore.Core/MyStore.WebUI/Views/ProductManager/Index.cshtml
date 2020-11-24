@@ -5,26 +5,26 @@
     ViewBag.Title = "CreateProduct";
 }
 
-<h2>Products</h2>
+    <h2>@Html.DisplayName(MyStore.WebUI.Resources.Resource.Products)</h2>
 
 <p>
-    @Html.ActionLink("Create New Product", "Create")
+    @Html.ActionLink(MyStore.WebUI.Resources.Resource.Add_a_New_Product, "Create",null,new { @class = "btn btn-success" })
 </p>
 <table class="table">
     <tr>
         @*Images upload modification*@
         <th></th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayName(MyStore.WebUI.Resources.Resource.ProductName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayName(MyStore.WebUI.Resources.Resource.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayName(MyStore.WebUI.Resources.Resource.Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category)
+            @Html.DisplayName(MyStore.WebUI.Resources.Resource.Category)
         </th>
         @*<th>
                 @Html.DisplayNameFor(model => model.Image)
@@ -55,10 +55,10 @@
             @*<td>
                     @Html.DisplayFor(modelItem => item.Image)
                 </td>*@
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
+        <td>
+            @Html.ActionLink(MyStore.WebUI.Resources.Resource.Edit, "Edit", new { id = item.Id }, new { @class = "btn btn-default" }) |||
+            @Html.ActionLink(MyStore.WebUI.Resources.Resource.Delete, "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+        </td>
         </tr>
     }
 

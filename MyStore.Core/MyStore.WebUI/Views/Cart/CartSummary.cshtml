@@ -3,6 +3,6 @@
 
     <ul class="nav navbar-nav navbar-right">
           @*"Index" page "Cart" controller @Model.CartCount items is displaying*@
-        <li><a href="@Url.Action("Index","Cart")">@Model.CartCount items</a></li>
+        <li><a href="@Url.Action("Index","Cart")">@Model.CartCount @Html.DisplayName(MyStore.WebUI.Resources.Resource.Cart)</a></li>
         <li><a href="@Url.Action("Index", "Cart")">@String.Format("{0:c}", Model.CartTotal)</a></li>
     </ul>

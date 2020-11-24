@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+    <h2>@Html.DisplayName(MyStore.WebUI.Resources.Resource.Edit)</h2>
 
 
 @using (Html.BeginForm())
@@ -12,13 +12,13 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Product Category</h4>
+        <h4>@Html.DisplayName(MyStore.WebUI.Resources.Resource.ProductCategory)</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Category,MyStore.WebUI.Resources.Resource.Category, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Category, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
@@ -27,14 +27,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="@Html.DisplayName(MyStore.WebUI.Resources.Resource.Save)" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List of Product Categories", "Index")
+    @Html.ActionLink(MyStore.WebUI.Resources.Resource.Back_to_List_of_Product_Categories, "Index")
 </div>
 
 @section Scripts {

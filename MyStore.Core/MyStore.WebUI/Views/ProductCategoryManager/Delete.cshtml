@@ -4,16 +4,16 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Product Deletion</h2>
+ <h2>@Html.DisplayName(MyStore.WebUI.Resources.Resource.Product_Deletion)</h2>
 
-<h3>Are you sure you want to delete this product?</h3>
+ <h3>@Html.DisplayName(MyStore.WebUI.Resources.Resource.Are_you_sure_you_want_to_delete_this_product_category)?</h3>
 
 <div>
-    <h4>Product Category</h4>
+    <h4></h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Category)
+            @Html.DisplayName(MyStore.WebUI.Resources.Resource.ProductCategory):
         </dt>
 
         <dd>
@@ -26,8 +26,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List of Product Categories", "Index")
+            <input type="submit" value=" @Html.DisplayName(MyStore.WebUI.Resources.Resource.Delete)" class="btn btn-danger" /> |
+            @Html.ActionLink(MyStore.WebUI.Resources.Resource.Back_to_List_of_Product_Categories, "Index",null,new { @class = "btn btn-success" })
         </div>
     }
 </div>

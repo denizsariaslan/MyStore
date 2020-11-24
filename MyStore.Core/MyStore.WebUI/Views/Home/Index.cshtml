@@ -65,10 +65,10 @@
     <table class="table">
         @*Created list filters on left side*@
         <div class="col-md-2">
-            <h1>Products</h1>
+            <h2>@Html.DisplayName(MyStore.WebUI.Resources.Resource.Products)</h2>
             @*<h4>Filter By Category</h4>*@
             <div class="list-group">
-                @Html.ActionLink("All Products", "Index", null, new { @class = Request["Category"] == null ? "list-group-item active" : "list-group-item" })
+                @Html.ActionLink(MyStore.WebUI.Resources.Resource.All_Products, "Index", null, new { @class = Request["Category"] == null ? "list-group-item active" : "list-group-item" })
                 @foreach (var cat in Model.ProductCategories)
                 {
                     @Html.ActionLink(cat.Category, "Index", new { Category = cat.Category }, new { @class = Request["Category"] == cat.Category ? "list-group-item active" : "list-group-item" })
@@ -95,12 +95,13 @@
                         </div>
                         <div class="col-md-12">
                             @*Adding reference to Add to Cart button work*@
-                            <a href="@Url.Action("AddToCart","Cart", new { Id = item.Id })" class="btn btn-default">Add To Cart</a>
+                            @Html.ActionLink(MyStore.WebUI.Resources.Resource.AddToCart, "AddToCart", "Cart", new { Id = item.Id },new { @class="btn btn-success"})
+
                         </div>
                     </div>
-                }
-            </div>
-    </table>
+                   }
+             </div>
+</table>
         @*Clear fix which just basically clears any existing,formatting and columns and resets and lay out the might have this will just fix any issues with any
         filters or anything we might wish to display underneath.*@
         <div class="cold-md-12 claerfix" />

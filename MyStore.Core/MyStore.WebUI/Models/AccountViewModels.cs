@@ -49,13 +49,13 @@ namespace MyStore.WebUI.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "e-mail")]
         [EmailAddress]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "password")]
         public string Password { get; set; }
 
         [Display(Name = "Remember me?")]

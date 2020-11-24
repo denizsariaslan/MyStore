@@ -26,14 +26,16 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home" )</li>*@
-                    <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+                    <li>@Html.ActionLink(MyStore.WebUI.Resources.Resource.Admin, "Index", "Admin")</li>                   
+                    <li>@Html.ActionLink("Turkish", "Change", "Home", new { LanguageAbbrevation = "tr" }, null)</li>
+                    <li>@Html.ActionLink("English", "Change", "Home", new { LanguageAbbrevation = "en" }, null)</li>
 
-                    @*@if (Request.IsAuthenticated && User.IsInRole("Admin"))*@  
-                     @*{*@
+                    @*@if (Request.IsAuthenticated && User.IsInRole("Admin"))*@
+                    @*{*@
                     @*<li>@Html.ActionLink("Admin", "Index", "Admin")</li>*@ @*Replacing them with a link to our Admin main page*@
                     @*<li>@Html.ActionLink("Product Admin", "Index", "ProductManager")</li>*@
                     @*<li>@Html.ActionLink("Category Admin", "Index", "ProductCategoryManager")</li>*@
-                     @*}*@
+                    @*}*@
                 </ul>
                 @Html.Partial("_LoginPartial")
                 @{ 

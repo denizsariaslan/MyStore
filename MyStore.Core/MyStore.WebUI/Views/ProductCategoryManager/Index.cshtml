@@ -4,29 +4,33 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Product Categories</h2>
+    <h2>@Html.DisplayName(MyStore.WebUI.Resources.Resource.ProductCategories)</h2>
 
 <p>
-    @Html.ActionLink("Create New Category", "Create")
+    @Html.ActionLink(MyStore.WebUI.Resources.Resource.Create_a_New_Category, "Create",null,new { @class = "btn btn-success" })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Category)
+            @Html.DisplayName(MyStore.WebUI.Resources.Resource.ProductCategories)
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Category)
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>
+        @Html.ActionLink(MyStore.WebUI.Resources.Resource.Edit, "Edit", new { id = item.Id }, new { @class = "btn btn-default" }) |||
+        @Html.ActionLink(MyStore.WebUI.Resources.Resource.Delete, "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+    </td>
+</tr>
 }
 
 </table>

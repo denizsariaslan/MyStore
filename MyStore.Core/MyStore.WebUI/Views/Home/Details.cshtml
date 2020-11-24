@@ -15,7 +15,7 @@
 
 
             <dt>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayName(MyStore.WebUI.Resources.Resource.Description):
             </dt>
 
             <dd>
@@ -23,18 +23,17 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Price)
+                @Html.DisplayName(MyStore.WebUI.Resources.Resource.Price):
             </dt>
 
             <dd>
                 $@Html.DisplayFor(model => model.Price)
             </dd>
             <dt></dt>
-             @*Adding reference to Add to Cart button work*@
-            <dd><a href="@Url.Action("AddToCart","Cart", new { Id = Model.Id })" class="btn btn-default"> Add To Cart</a></dd>
-
-            <dt></dt>
-            <dd>@Html.ActionLink("Back to List", "Index")</dd>
+            @*Adding reference to Add to Cart button work*@
+            <dd>@Html.ActionLink(MyStore.WebUI.Resources.Resource.AddToCart, "AddToCart", "Cart", new { Id = Model.Id }, new { @class = "btn btn-success" })</dd>
+ 
+            <dd>@Html.ActionLink(MyStore.WebUI.Resources.Resource.Back_to_List_of_Products, "Index", null, new { @class = "btn btn-info" })</dd>
         </dl>
     </div>
 </div>
