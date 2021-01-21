@@ -57,6 +57,29 @@ namespace MyStore.WebUI.Controllers
               return View(model);
         }
 
+        [HttpPost]
+
+        public ActionResult Search(string searchtext)
+        {
+            List<Product> products = context.Collection().Where(p => p.Name.Contains(searchtext) || p.Description.Contains(searchtext)).ToList();
+            List<ProductCategory> Categories = productCategories.Collection().ToList();
+
+            if (products == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                ProductListViewModel model = new ProductListViewModel();
+                //Sign various that I need
+                model.Products = products;
+                model.ProductCategories = Categories;
+
+                return View("Index", model);
+
+            }
+
+        }
         public ActionResult Details(string Id)
         {
             Product product = context.Find(Id);
@@ -87,18 +110,8 @@ namespace MyStore.WebUI.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-            public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        
+        
     }
+
 }

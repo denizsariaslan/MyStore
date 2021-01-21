@@ -31,12 +31,27 @@ namespace MyStore.WebUI.Controllers
             productCategories = productCategoriesContext;
         }
 
-
         // GET: ProductManager
         public ActionResult Index()
         {
             List<Product> products = context.Collection().ToList();
             return View(products);
+        }
+
+        [HttpPost]
+     
+        public ActionResult Search(string searchtext)
+        {
+           List<Product> product = context.Collection().Where(p=>p.Name.Contains(searchtext) || p.Category.Contains(searchtext) || p.Description.Contains(searchtext)).ToList();
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                  
+                return View("Index", product);
+            }
         }
 
         public ActionResult Create()
@@ -77,7 +92,6 @@ namespace MyStore.WebUI.Controllers
             }
 
         }
-
         public ActionResult Edit(string Id)
         {
             Product product = context.Find(Id);

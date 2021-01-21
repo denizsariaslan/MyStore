@@ -18,7 +18,6 @@ namespace MyStore.Services
         {
             this.orderContext = OrderContext;
         }
-
         public void CreateOrder(Order baseOrder, List<CartItemViewModel> cartItems)
         {
             //iterate through our cartItems. For each cart item I am going to added to the underlying baseOrder.
@@ -48,6 +47,7 @@ namespace MyStore.Services
         {
             return orderContext.Find(Id);
         }
+
         // Added this new method according to order management process
         public void UpdateOrder(Order updatedOrder) // this will update our order. // I want to update our Order will be the order status.
         {

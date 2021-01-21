@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace MyStore.DataAccess.SQL
 {
-    public class SQLRepository<T> : IRepository<T> where T : BaseEntity
+    public class SQLRepository<Products> : IRepository<Products> where Products : BaseEntity
     {
         //Internal varialbes
         internal DataContext context;
-        internal DbSet<T> dbSet;
+        internal DbSet<Products> dbSet;
 
         //Constructor
         //Constructor needs to allow us to passing in a date context.
@@ -22,11 +23,11 @@ namespace MyStore.DataAccess.SQL
 
         public SQLRepository(DataContext context){
             this.context = context; // initialize context object
-            this.dbSet = context.Set<T>();  // Set underlying table from model T
+            this.dbSet = context.Set<Products>();  // Set underlying table from model T
 
         }
 
-        public IQueryable<T> Collection()
+        public IQueryable<Products> Collection()
         {
             return dbSet;
         }
@@ -45,17 +46,22 @@ namespace MyStore.DataAccess.SQL
             dbSet.Remove(t);
         }
 
-        public T Find(string Id)
+        public Products Find(string Id)
         {
             return dbSet.Find(Id);
         }
 
-        public void Insert(T t)
+        public Products Search(string Name)
+        {
+            return dbSet.Find(Name);
+        }
+
+        public void Insert(Products t)
         {
             dbSet.Add(t);
         }
 
-        public void Update(T t)
+        public void Update(Products t)
         {
             dbSet.Attach(t);
             context.Entry(t).State = EntityState.Modified; //This tells Entity framework that when we call the save change this method to look for this object which is t and persists to the database

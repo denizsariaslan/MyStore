@@ -112,7 +112,10 @@ namespace MyStore.DataAccess.InMemory
         }
 
 
-
+        public T Search(string Name)
+        {
+            return Find(Name);
+        }
 
     }
 }

@@ -5,61 +5,71 @@
     ViewBag.Title = "CreateProduct";
 }
 
-    <h2>@Html.DisplayName(MyStore.WebUI.Resources.Resource.Products)</h2>
+<h2>@Html.DisplayName(MyStore.WebUI.Resources.Resource.Products)</h2>
 
 <p>
-    @Html.ActionLink(MyStore.WebUI.Resources.Resource.Add_a_New_Product, "Create",null,new { @class = "btn btn-success" })
+    @Html.ActionLink(MyStore.WebUI.Resources.Resource.Add_a_New_Product, "Create", null, new { @class = "btn btn-success" })
 </p>
-<table class="table">
-    <tr>
-        @*Images upload modification*@
-        <th></th>
-        <th>
-            @Html.DisplayName(MyStore.WebUI.Resources.Resource.ProductName)
-        </th>
-        <th>
-            @Html.DisplayName(MyStore.WebUI.Resources.Resource.Description)
-        </th>
-        <th>
-            @Html.DisplayName(MyStore.WebUI.Resources.Resource.Price)
-        </th>
-        <th>
-            @Html.DisplayName(MyStore.WebUI.Resources.Resource.Category)
-        </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.Image)
-            </th>*@
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
+    @using (Html.BeginForm("Search", "ProductManager", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
-        <tr>
-            @*Images upload modification*@
-            <td>
-                @*this columns condaining image*@
-                <img class="img-thumbnail" style="height:50px" src="~/Content/ProductImages/@item.Image" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.Image)
-                </td>*@
-        <td>
-            @Html.ActionLink(MyStore.WebUI.Resources.Resource.Edit, "Edit", new { id = item.Id }, new { @class = "btn btn-default" }) |||
-            @Html.ActionLink(MyStore.WebUI.Resources.Resource.Delete, "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
-        </td>
-        </tr>
+    <div class="search-container">
+        <input type="text" placeholder="" Name="searchtext" />
+        <input class="btn-primary" type="submit" value=@Html.DisplayName(MyStore.WebUI.Resources.Resource.Search) />
+    </div>
     }
+        <table class="table">
+            <tr>
+                @*Images upload modification*@
+                <th></th>
+                <th>
+                    @Html.DisplayName(MyStore.WebUI.Resources.Resource.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayName(MyStore.WebUI.Resources.Resource.Description)
+                </th>
+                <th>
+                    @Html.DisplayName(MyStore.WebUI.Resources.Resource.Price)
+                </th>
+                <th>
+                    @Html.DisplayName(MyStore.WebUI.Resources.Resource.Category)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Image)
+                    </th>*@
+                <th></th>
+            </tr>
 
-</table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @*Images upload modification*@
+                    <td>
+                        @*this columns condaining image*@
+                        <img class="img-thumbnail" style="height:50px" src="~/Content/ProductImages/@item.Image" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Image)
+                        </td>*@
+                    <td>
+                        @Html.ActionLink(MyStore.WebUI.Resources.Resource.Edit, "Edit", new { id = item.Id }, new { @class = "btn btn-default" }) |||
+                        @Html.ActionLink(MyStore.WebUI.Resources.Resource.Delete, "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+

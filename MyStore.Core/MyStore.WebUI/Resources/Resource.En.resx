@@ -327,4 +327,10 @@
   <data name="Your Order Id" xml:space="preserve">
     <value>Your Order Id</value>
   </data>
+  <data name="You can contact us within working hours, 7 days a week" xml:space="preserve">
+    <value>You can contact us within working hours, 7 days a week</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
 </root>

@@ -18,12 +18,27 @@ namespace MyStore.WebUI.Controllers
         {
             this.orderService = OrderService;
         }
+
         // GET: OrderManager
         public ActionResult Index() //Returning list of orders
         {
             List<Order> orders = orderService.GetOrderList();
 
             return View(orders);
+        }
+
+        [HttpPost]
+        public ActionResult Search(string searchtext)
+        {
+            List<Order> orders = orderService.GetOrderList().Where(p => p.FirstName.Contains(searchtext) || p.LastName.Contains(searchtext)).ToList();
+            if (orders == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View("Index", orders);
+            }
         }
 
         public ActionResult UpdateOrder(string Id) //getting an individual order

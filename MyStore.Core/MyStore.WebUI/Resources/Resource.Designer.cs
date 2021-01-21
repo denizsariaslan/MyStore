@@ -610,6 +610,15 @@ namespace MyStore.WebUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ara.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Teslimat Adresi Bilgileri.
         /// </summary>
         public static string Shipping_Information {
@@ -660,6 +669,15 @@ namespace MyStore.WebUI.Resources {
         public static string Thank_you_for_your_order {
             get {
                 return ResourceManager.GetString("Thank you for your order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Haftanın 7 günü mesai saatleri içinde bizimle iletişime geçebilirsiniz.
+        /// </summary>
+        public static string You_can_contact_us_within_working_hours__7_days_a_week {
+            get {
+                return ResourceManager.GetString("You can contact us within working hours, 7 days a week", resourceCulture);
             }
         }
         

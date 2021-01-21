@@ -11,5 +11,6 @@ namespace MyStore.Core.Contracts
         T Find(string Id);
         void Insert(T t);
         void Update(T t);
+        T Search(string Name);
     }
 }

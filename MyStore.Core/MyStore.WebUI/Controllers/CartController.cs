@@ -36,7 +36,7 @@ namespace MyStore.WebUI.Controllers
 
         //POST
         // Adding into Cart
-        public ActionResult AddToCart(string Id)
+        public  ActionResult AddToCart(string Id)
         {
             //Take in a product Id and pass that through to the cart service.
             cartService.AddToCart(this.HttpContext, Id);
@@ -106,8 +106,6 @@ namespace MyStore.WebUI.Controllers
             {
                 return RedirectToAction("Error");
             }
-
-            
 
         }
 

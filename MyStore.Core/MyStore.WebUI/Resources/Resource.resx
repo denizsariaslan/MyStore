@@ -324,4 +324,10 @@
   <data name="Your Order Id" xml:space="preserve">
     <value>Sipariş Kodunuz</value>
   </data>
+  <data name="You can contact us within working hours, 7 days a week" xml:space="preserve">
+    <value>Haftanın 7 günü mesai saatleri içinde bizimle iletişime geçebilirsiniz</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Ara</value>
+  </data>
 </root>

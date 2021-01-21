@@ -8,24 +8,24 @@ using System.Threading.Tasks;
 
 namespace MyStore.WebUI.Tests.Mocks
 {
-    public class MockContext<T> :IRepository<T> where T: BaseEntity
+    public class MockContext<Products> :IRepository<Products> where Products : BaseEntity
     {
 
-        List<T> items;
+        List<Products> items;
         string className;
 
        // public InMemoryRepository()
         public MockContext()
         {
-            items = new List<T>();   
-            //className = typeof(T).Name; 
-            //items = cache[className] as List<T>; 
+            items = new List<Products>();
+            //className = typeof(Products).Name; 
+            //items = cache[className] as List<Products>; 
             //if (items == null)
             //{
-            //    items = new List<T>();
+            //    items = new List<Products>();
             //}
         }
-      
+
         public void Commit()
         {
             // cache[className] = items;
@@ -34,15 +34,15 @@ namespace MyStore.WebUI.Tests.Mocks
 
         // Insert Method
 
-        public void Insert(T t)
+        public void Insert(Products t)
         {
             items.Add(t);
         }
         // Update Method 
 
-        public void Update(T t)
+        public void Update(Products t)
         {
-            T tToUpdate = items.Find(i => i.Id == t.Id);
+            Products tToUpdate = items.Find(i => i.Id == t.Id);
 
             if (tToUpdate != null)
             {
@@ -55,9 +55,9 @@ namespace MyStore.WebUI.Tests.Mocks
         }
 
         //Find Method
-        public T Find(string Id)
+        public Products Find(string Id)
         {
-            T t = items.Find(i => i.Id == Id);
+            Products t = items.Find(i => i.Id == Id);
             if (t != null)
             {
                 return t;
@@ -67,13 +67,13 @@ namespace MyStore.WebUI.Tests.Mocks
                 throw new Exception(t + " Not found");
             }
         }
-        public IQueryable<T> Collection()
+        public IQueryable<Products> Collection()
         {
             return items.AsQueryable();
         }
         public void Delete(string Id)
         {
-            T tToDelete = items.Find(i => i.Id == Id);
+            Products tToDelete = items.Find(i => i.Id == Id);
 
             if (tToDelete != null)
             {
@@ -83,6 +83,11 @@ namespace MyStore.WebUI.Tests.Mocks
             {
                 throw new Exception(className + " Not Found");
             }
+        }
+
+        public Products Search(string Name)
+        {
+            return Find(Name);
         }
 
     }
